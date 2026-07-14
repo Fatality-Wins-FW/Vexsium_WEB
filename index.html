@@ -10,7 +10,7 @@
     <div class="container">
         <!-- Logo with fallback -->
         <div class="logo-container">
-            <img src="Logo.png" alt="Vyrix" id="logoImg" onload="logoLoaded()" onerror="logoFailed()">
+            <img src="Logo.png" alt="Vyrix" id="logoImg" onload="logoLoaded()" onerror="logoFailed()" style="display: none;">
             <div class="logo-text" id="logoText">Vyrix.win</div>
         </div>
 
@@ -67,23 +67,27 @@
     <script src="script.js"></script>
     <script>
         function logoLoaded() {
-            // Logo loaded successfully - hide text
-            document.getElementById('logoImg').style.display = 'block';
-            document.getElementById('logoText').style.display = 'none';
+            // Logo loaded successfully - check if it's good quality
+            var img = document.getElementById('logoImg');
+            // If image is too small or seems incomplete, use text instead
+            if (img.naturalWidth < 100 || img.naturalHeight < 100) {
+                logoFailed();
+            } else {
+                img.style.display = 'block';
+                document.getElementById('logoText').style.display = 'none';
+            }
         }
         
         function logoFailed() {
-            // Logo failed to load - show text fallback
+            // Use text fallback
             document.getElementById('logoImg').style.display = 'none';
             document.getElementById('logoText').style.display = 'block';
         }
         
-        // Check on page load in case image is cached
+        // Initialize on page load
         window.addEventListener('load', function() {
             var img = document.getElementById('logoImg');
-            if (img.complete && img.naturalWidth === 0) {
-                logoFailed();
-            } else if (img.complete) {
+            if (img.complete) {
                 logoLoaded();
             }
         });
