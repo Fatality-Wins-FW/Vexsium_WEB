@@ -26,6 +26,30 @@ async function updateMemberCount() {
     }
 }
 
+// Dropdown Toggle
+const dropdown = document.querySelector('.dropdown');
+const downloadBtn = document.getElementById('downloadBtn');
+
+downloadBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    dropdown.classList.toggle('active');
+});
+
+// Close dropdown when clicking outside
+document.addEventListener('click', (e) => {
+    if (!dropdown.contains(e.target)) {
+        dropdown.classList.remove('active');
+    }
+});
+
+// Prevent dropdown from closing when clicking inside it
+const dropdownMenu = document.querySelector('.dropdown-menu');
+if (dropdownMenu) {
+    dropdownMenu.addEventListener('click', (e) => {
+        e.stopPropagation();
+    });
+}
+
 // Initialize
 updateMemberCount();
-console.log('Vyrix.win Beta - Welcome to the future!');
+console.log('Vyrix.win Beta - Welcome!');
