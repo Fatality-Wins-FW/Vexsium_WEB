@@ -27,6 +27,7 @@ body {
     font-size: 13px;
     font-weight: 600;
     color: #ee5aa8;
+    z-index: 100;
 }
 
 .container {
@@ -35,7 +36,6 @@ body {
     width: 100%;
 }
 
-/* Logo Section */
 .logo-section {
     margin-bottom: 24px;
     min-height: 100px;
@@ -91,7 +91,6 @@ body {
     color: #10b981;
 }
 
-/* Dropdown */
 .dropdown {
     position: relative;
     width: 100%;
@@ -136,7 +135,6 @@ body {
     transform: translateY(-10px);
     transition: all 0.3s ease;
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(20px);
     z-index: 1000;
 }
 
@@ -154,21 +152,12 @@ body {
     border-radius: 8px;
     color: #8b8b9e;
     font-size: 14px;
-    cursor: default;
-    transition: all 0.2s ease;
-}
-
-.dropdown-item:hover:not(.disabled) {
-    background: rgba(255, 255, 255, 0.05);
-    color: #ffffff;
 }
 
 .dropdown-item.disabled {
     opacity: 0.5;
-    cursor: not-allowed;
 }
 
-/* Social Buttons */
 .social-buttons {
     display: flex;
     gap: 12px;
@@ -208,19 +197,19 @@ body {
     cursor: not-allowed;
 }
 
-/* Stats */
 .stats {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 16px;
     margin-bottom: 32px;
-}
-
-.stat {
     background: rgba(255, 255, 255, 0.03);
     border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 12px;
     padding: 20px;
+}
+
+.stat {
+    padding: 8px;
 }
 
 .stat-value {
@@ -237,7 +226,6 @@ body {
     color: #6b6b7e;
 }
 
-/* Features */
 .features {
     background: rgba(255, 255, 255, 0.03);
     border: 1px solid rgba(255, 255, 255, 0.08);
@@ -272,7 +260,6 @@ body {
     text-decoration: underline;
 }
 
-/* Responsive */
 @media (max-width: 640px) {
     .stats {
         grid-template-columns: 1fr;

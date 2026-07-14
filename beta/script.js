@@ -1,4 +1,3 @@
-// Number Formatting (1K, 1.5K, 1M, etc.)
 function formatNumber(num) {
     if (num >= 1000000) {
         return (num / 1000000).toFixed(1).replace(/\.0$/, '') + 'M';
@@ -9,7 +8,6 @@ function formatNumber(num) {
     return num.toString();
 }
 
-// Fetch Discord Member Count
 async function updateMemberCount() {
     const countElement = document.getElementById('member-count');
     try {
@@ -26,7 +24,6 @@ async function updateMemberCount() {
     }
 }
 
-// Dropdown Toggle
 const dropdown = document.querySelector('.dropdown');
 const downloadBtn = document.getElementById('downloadBtn');
 
@@ -35,14 +32,12 @@ downloadBtn.addEventListener('click', (e) => {
     dropdown.classList.toggle('active');
 });
 
-// Close dropdown when clicking outside
 document.addEventListener('click', (e) => {
     if (!dropdown.contains(e.target)) {
         dropdown.classList.remove('active');
     }
 });
 
-// Prevent dropdown from closing when clicking inside it
 const dropdownMenu = document.querySelector('.dropdown-menu');
 if (dropdownMenu) {
     dropdownMenu.addEventListener('click', (e) => {
@@ -50,6 +45,4 @@ if (dropdownMenu) {
     });
 }
 
-// Initialize
 updateMemberCount();
-console.log('Vyrix.win Beta - Welcome!');
