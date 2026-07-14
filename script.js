@@ -1,18 +1,22 @@
-// Download button click handler
-document.getElementById('downloadBtn').addEventListener('click', () => {
-    // Add your download logic here
-    console.log('Download clicked - coming soon!');
+// Dropdown Toggle
+const dropdown = document.querySelector('.dropdown');
+const downloadBtn = document.getElementById('downloadBtn');
+
+downloadBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    dropdown.classList.toggle('active');
 });
 
-// Add hover effect to social buttons
-document.querySelectorAll('.social-btn:not(.disabled)').forEach(btn => {
-    btn.addEventListener('mouseenter', function() {
-        this.style.transform = 'translateY(-2px)';
-    });
-    
-    btn.addEventListener('mouseleave', function() {
-        this.style.transform = 'translateY(0)';
-    });
+// Close dropdown when clicking outside
+document.addEventListener('click', (e) => {
+    if (!dropdown.contains(e.target)) {
+        dropdown.classList.remove('active');
+    }
 });
 
-console.log('Vyrix.win loaded successfully!');
+// Prevent dropdown from closing when clicking inside it
+document.querySelector('.dropdown-menu').addEventListener('click', (e) => {
+    e.stopPropagation();
+});
+
+console.log('Vyrix.win - Welcome!');
