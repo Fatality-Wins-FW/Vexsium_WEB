@@ -1,3 +1,33 @@
+// Number Formatting System (e.g., 1,250 -> 1.2K, 1,000,000 -> 1M)
+function formatNumber(num) {
+    if (num >= 1000000) {
+        return (num / 1000000).toFixed(1).replace(/\.0$/, '') + 'M';
+    }
+    if (num >= 1000) {
+        return (num / 1000).toFixed(1).replace(/\.0$/, '') + 'K';
+    }
+    return num.toString();
+}
+
+// Fetch Discord Widget Member Count
+async function updateMemberCount() {
+    const countElement = document.getElementById('member-count');
+    try {
+        const response = await fetch('https://discord.com/api/guilds/1520162857159753868/widget.json');
+        if (!response.ok) throw new Error('Failed to fetch');
+        
+        const data = await response.json();
+        // Widget returns an array of online members
+        const memberCount = data.members ? data.members.length : 0;
+        
+        countElement.textContent = formatNumber(memberCount) + '+';
+    } catch (error) {
+        console.error('Error fetching member count:', error);
+        // Fallback in case Discord API blocks or fails
+        countElement.textContent = '1K+'; 
+    }
+}
+
 // Dropdown Toggle
 const dropdown = document.querySelector('.dropdown');
 const downloadBtn = document.getElementById('downloadBtn');
@@ -15,8 +45,13 @@ document.addEventListener('click', (e) => {
 });
 
 // Prevent dropdown from closing when clicking inside it
-document.querySelector('.dropdown-menu').addEventListener('click', (e) => {
-    e.stopPropagation();
-});
+const dropdownMenu = document.querySelector('.dropdown-menu');
+if (dropdownMenu) {
+    dropdownMenu.addEventListener('click', (e) => {
+        e.stopPropagation();
+    });
+}
 
+// Initialize
+updateMemberCount();
 console.log('Vyrix.win - Welcome!');
