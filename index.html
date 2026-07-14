@@ -8,8 +8,11 @@
 </head>
 <body>
     <div class="container">
-        <!-- Logo Text -->
-        <div class="logo-text">Vyrix.win</div>
+        <!-- Logo with fallback -->
+        <div class="logo-container">
+            <img src="Logo.png" alt="Vyrix" id="logoImg" onerror="this.style.display='none'; document.getElementById('logoText').style.display='block'">
+            <div class="logo-text" id="logoText" style="display: none;">Vyrix.win</div>
+        </div>
 
         <!-- Main Buttons -->
         <div class="button-group">

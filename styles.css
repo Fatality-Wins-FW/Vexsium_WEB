@@ -21,7 +21,22 @@ body {
     width: 100%;
 }
 
-/* Gradient Logo Text */
+/* Logo */
+.logo-container {
+    margin-bottom: 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 120px;
+}
+
+.logo-container img {
+    width: 120px;
+    height: auto;
+    object-fit: contain;
+}
+
+/* Gradient Logo Text Fallback */
 .logo-text {
     font-size: 48px;
     font-weight: 800;
@@ -29,7 +44,6 @@ body {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    margin-bottom: 32px;
     letter-spacing: -1px;
 }
 
@@ -160,10 +174,6 @@ body {
 
 /* Responsive */
 @media (max-width: 480px) {
-    .logo-text {
-        font-size: 42px;
-    }
-    
     .button-group {
         flex-direction: column;
     }
