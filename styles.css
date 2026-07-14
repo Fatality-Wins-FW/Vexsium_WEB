@@ -31,6 +31,35 @@ body {
     height: 120px;
     object-fit: contain;
     filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.1));
+    display: block;
+}
+
+/* Fallback if image doesn't load */
+.logo-container img[src=""],
+.logo-container img:not([src]) {
+    display: none;
+}
+
+.logo-text {
+    font-size: 32px;
+    font-weight: 800;
+    background: linear-gradient(135deg, #667eea 0%, #ee5aa8 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 32px;
+    display: none;
+}
+
+.logo-container img[alt="Vyrix"]:not([src]),
+.logo-container img[src="logo.png"]:not([src]) {
+    display: none;
+}
+
+/* Show text if image fails */
+img[src="logo.png"]:not([src]) + .logo-text,
+img.error + .logo-text {
+    display: block;
 }
 
 /* Button Group */
