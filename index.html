@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vyrix.win</title>
+    <!-- Cloudflare Turnstile Script -->
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
@@ -15,7 +17,40 @@
             justify-content: center;
             align-items: center;
             padding: 20px;
+            overflow: hidden; /* Locked until verified */
         }
+        
+        /* Turnstile Gate Styles */
+        #turnstile-gate {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: #0a0a0f;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 99999;
+            transition: opacity 0.6s ease, visibility 0.6s ease;
+        }
+        #turnstile-gate.hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+        #turnstile-gate h2 {
+            color: #ffffff;
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            text-align: center;
+        }
+        #turnstile-gate p {
+            color: #8b8b9e;
+            font-size: 14px;
+            margin-bottom: 24px;
+            text-align: center;
+        }
+
         .container { text-align: center; max-width: 600px; width: 100%; }
         .logo-section { margin-bottom: 24px; min-height: 100px; display: flex; justify-content: center; align-items: center; }
         .logo { width: 90px; height: auto; user-select: none; pointer-events: none; filter: drop-shadow(0 0 30px rgba(102, 126, 234, 0.4)); }
@@ -124,6 +159,13 @@
     </style>
 </head>
 <body>
+    <!-- Turnstile Gate Overlay -->
+    <div id="turnstile-gate">
+        <h2>Verify you're human</h2>
+        <p>Please complete the security check to access Vyrix.win</p>
+        <div class="cf-turnstile" data-sitekey="0x4AAAAAAD1--8ecGoH4H15n" data-callback="onTurnstileSuccess" data-theme="dark"></div>
+    </div>
+
     <div class="container">
         <div class="logo-section">
             <img src="Logo.png" alt="Vyrix" class="logo" id="logo" onerror="this.style.display='none'; document.getElementById('logoText').style.display='block'">
@@ -246,6 +288,14 @@
     </div>
     
     <script>
+        // Turnstile Success Callback
+        function onTurnstileSuccess(token) {
+            const gate = document.getElementById('turnstile-gate');
+            gate.classList.add('hidden');
+            document.body.style.overflow = 'auto'; // Re-enable scrolling
+            sessionStorage.setItem('cf_turnstile_token', token);
+        }
+
         function formatNumber(num) {
             if (num >= 1000000) return (num / 1000000).toFixed(1).replace(/\.0$/, '') + 'M';
             if (num >= 1000) return (num / 1000).toFixed(1).replace(/\.0$/, '') + 'K';
