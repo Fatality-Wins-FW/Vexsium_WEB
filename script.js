@@ -24,7 +24,7 @@ async function updateMemberCount() {
     } catch (error) {
         console.error('Error fetching member count:', error);
         // Fallback in case Discord API blocks or fails
-        countElement.textContent = '1K+'; 
+        countElement.textContent = '30+'; 
     }
 }
 
