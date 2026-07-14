@@ -34,6 +34,10 @@ body {
     width: 120px;
     height: auto;
     object-fit: contain;
+    user-select: none; /* Stops text selection highlight */
+    -webkit-user-drag: none; /* Stops drag ghost image */
+    pointer-events: none; /* Stops all clicking/highlighting interactions */
+    background: transparent !important; /* Forces pure transparent background */
 }
 
 /* Gradient Logo Text Fallback */
