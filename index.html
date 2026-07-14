@@ -8,10 +8,10 @@
 </head>
 <body>
     <div class="container">
-        <!-- Logo -->
+        <!-- Logo with fallback -->
         <div class="logo-container">
-            <img src="logo.png" alt="Vyrix" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
-            <div class="logo-text" style="display: none;">Vyrix</div>
+            <img src="logo.png" alt="Vyrix" id="logoImg" onload="logoLoaded()" onerror="logoFailed()">
+            <div class="logo-text" id="logoText">Vyrix.win</div>
         </div>
 
         <!-- Main Buttons -->
@@ -65,5 +65,28 @@
     </div>
 
     <script src="script.js"></script>
+    <script>
+        function logoLoaded() {
+            // Logo loaded successfully - hide text
+            document.getElementById('logoImg').style.display = 'block';
+            document.getElementById('logoText').style.display = 'none';
+        }
+        
+        function logoFailed() {
+            // Logo failed to load - show text fallback
+            document.getElementById('logoImg').style.display = 'none';
+            document.getElementById('logoText').style.display = 'block';
+        }
+        
+        // Check on page load in case image is cached
+        window.addEventListener('load', function() {
+            var img = document.getElementById('logoImg');
+            if (img.complete && img.naturalWidth === 0) {
+                logoFailed();
+            } else if (img.complete) {
+                logoLoaded();
+            }
+        });
+    </script>
 </body>
 </html>
