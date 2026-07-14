@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vyrix.win</title>
-    <!-- Cloudflare Turnstile Script -->
     <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -17,10 +16,9 @@
             justify-content: center;
             align-items: center;
             padding: 20px;
-            overflow: hidden; /* Locked until verified */
+            overflow: hidden;
         }
         
-        /* Turnstile Gate Styles */
         #turnstile-gate {
             position: fixed;
             top: 0; left: 0; right: 0; bottom: 0;
@@ -159,7 +157,6 @@
     </style>
 </head>
 <body>
-    <!-- Turnstile Gate Overlay -->
     <div id="turnstile-gate">
         <h2>Verify you're human</h2>
         <p>Please complete the security check to access Vyrix.win</p>
@@ -288,11 +285,10 @@
     </div>
     
     <script>
-        // Turnstile Success Callback
         function onTurnstileSuccess(token) {
             const gate = document.getElementById('turnstile-gate');
             gate.classList.add('hidden');
-            document.body.style.overflow = 'auto'; // Re-enable scrolling
+            document.body.style.overflow = 'auto';
             sessionStorage.setItem('cf_turnstile_token', token);
         }
 
