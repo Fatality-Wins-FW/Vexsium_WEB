@@ -331,14 +331,21 @@
 
         // Close dropdowns when clicking outside
         document.addEventListener('click', (e) => {
-            if (!downloadDropdown.contains(e.target)) downloadDropdown.classList.remove('active');
-            if (!infoBtn.contains(e.target)) infoDropdown.classList.remove('active');
+            // Close download dropdown if click is outside both button and menu
+            if (!downloadDropdown.contains(e.target)) {
+                downloadDropdown.classList.remove('active');
+            }
+                
+            // Close info dropdown if click is outside both button and menu
+            if (!infoBtn.contains(e.target) && !infoDropdown.contains(e.target)) {
+                infoDropdown.classList.remove('active');
+            }
         });
 
         // Initialize Data
         updateMemberCount();
         updateEndpointData();
-        
+
         // Refresh endpoint data every 30 seconds
         setInterval(updateEndpointData, 30000);
     </script>
