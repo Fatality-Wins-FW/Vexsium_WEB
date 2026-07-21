@@ -147,6 +147,7 @@
         .stat-value.status-maintenance { color: #f59e0b; }
         .stat-value.status-testing { color: #8b5cf6; }
         .stat-value.status-updating { color: #3b82f6; }
+        .stat-value.status-development { color: #f97316; } /* Added for In Development */
         
         .stat-label { font-size: 12px; color: #6b6b7e; }
         .features { background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 12px; padding: 24px; margin-bottom: 24px; }
@@ -322,8 +323,11 @@
                 const statusEl = document.getElementById('main-status');
                 statusEl.textContent = vyrix.Status;
                 
-                statusEl.classList.remove('status-operational', 'status-down', 'status-maintenance', 'status-testing', 'status-updating');
-                const statusClass = 'status-' + vyrix.Status.toLowerCase();
+                // Remove all existing status classes
+                statusEl.classList.remove('status-operational', 'status-down', 'status-maintenance', 'status-testing', 'status-updating', 'status-development');
+                
+                // Add new class based on status
+                const statusClass = 'status-' + vyrix.Status.toLowerCase().replace(/\s+/g, '-');
                 statusEl.classList.add(statusClass);
 
                 document.getElementById('ep-version').textContent = vyrix.Version;
@@ -348,7 +352,11 @@
                 const dot = document.getElementById('endpointStatusDot');
                 if(vyrix.Status === 'Operational') dot.style.background = '#10b981';
                 else if(vyrix.Status === 'Down') dot.style.background = '#ef4444';
-                else dot.style.background = '#f59e0b';
+                else if(vyrix.Status === 'Maintenance') dot.style.background = '#f59e0b';
+                else if(vyrix.Status === 'Testing') dot.style.background = '#8b5cf6';
+                else if(vyrix.Status === 'Updating') dot.style.background = '#3b82f6';
+                else if(vyrix.Status === 'In Development') dot.style.background = '#f97316';
+                else dot.style.background = '#6b6b7e'; // Default gray
 
             } catch (error) {
                 console.error('Error fetching endpoint:', error);
