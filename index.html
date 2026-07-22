@@ -121,11 +121,11 @@
             position: absolute;
             bottom: calc(100% + 8px);
             right: 0;
-            width: 280px;
+            width: 300px;
             background-color: #1a1a1a;
             border: 1px solid #2a2a2a;
             border-radius: 12px;
-            padding: 12px;
+            padding: 16px;
             opacity: 0;
             visibility: hidden;
             transform: translateY(10px);
@@ -138,12 +138,21 @@
         .info-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid #2a2a2a; }
         .info-title { font-size: 14px; font-weight: 700; color: #ffffff; }
         .info-status-dot { width: 8px; height: 8px; border-radius: 50%; background: #10b981; }
-        .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 16px; }
         .info-item { display: flex; flex-direction: column; gap: 2px; }
         .info-label { font-size: 11px; color: #6b6b7e; }
         .info-value { font-size: 13px; font-weight: 600; color: #ffffff; }
         .info-value.bool-true { color: #10b981; }
         .info-value.bool-false { color: #ef4444; }
+
+        .changelog-section { border-top: 1px solid #2a2a2a; padding-top: 12px; }
+        .changelog-title { font-size: 12px; font-weight: 700; color: #8b8b9e; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .changelog-list { display: flex; flex-direction: column; gap: 6px; max-height: 120px; overflow-y: auto; }
+        .changelog-item { font-size: 12px; color: #d4d4d8; padding-left: 12px; position: relative; line-height: 1.4; }
+        .changelog-item::before { content: "•"; position: absolute; left: 0; color: #667eea; }
+        .changelog-list::-webkit-scrollbar { width: 4px; }
+        .changelog-list::-webkit-scrollbar-track { background: #1a1a1a; }
+        .changelog-list::-webkit-scrollbar-thumb { background: #2a2a2a; border-radius: 4px; }
 
         .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 24px; background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 12px; padding: 24px 20px; }
         .stat { padding: 8px; }
@@ -265,6 +274,12 @@
                             <span class="info-value" id="ep-raknet">--</span>
                         </div>
                     </div>
+                    <div class="changelog-section">
+                        <div class="changelog-title">Latest Changes</div>
+                        <div class="changelog-list" id="changelog-list">
+                            <div class="changelog-item">Loading changelogs...</div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -297,7 +312,7 @@
         </div>
     </div>
     
- <script>
+    <script>
         function onTurnstileSuccess(token) {
             const gate = document.getElementById('turnstile-gate');
             gate.classList.add('hidden');
@@ -367,6 +382,22 @@
                 else if(vyrix.Status === 'Updating') dot.style.background = '#3b82f6';
                 else if(vyrix.Status === 'In Dev') dot.style.background = '#f97316';
                 else dot.style.background = '#6b6b7e';
+
+                // Render Changelogs
+                const changelogList = document.getElementById('changelog-list');
+                changelogList.innerHTML = '';
+                
+                if (vyrix.Changelogs && vyrix.Changelogs[vyrix.Version]) {
+                    const logs = vyrix.Changelogs[vyrix.Version];
+                    logs.forEach(log => {
+                        const item = document.createElement('div');
+                        item.className = 'changelog-item';
+                        item.textContent = log;
+                        changelogList.appendChild(item);
+                    });
+                } else {
+                    changelogList.innerHTML = '<div class="changelog-item">No changelogs available for this version.</div>';
+                }
 
             } catch (error) {
                 console.error('Error fetching endpoint:', error);

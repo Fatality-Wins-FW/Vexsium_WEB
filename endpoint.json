@@ -6,6 +6,11 @@
     "SUNC": 100,
     "Decompiler": true,
     "Multi Instance": false,
-    "RakNet": true
+    "RakNet": true,
+    "Changelogs": {
+      "0.0.0.1": [
+        "Release of Vyrix.win!."
+      ]
+    }
   }
 }
