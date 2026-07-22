@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vyrix.win</title>
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
@@ -15,7 +16,39 @@
             justify-content: center;
             align-items: center;
             padding: 20px;
+            overflow: hidden;
         }
+        
+        #turnstile-gate {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: #0a0a0f;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 99999;
+            transition: opacity 0.6s ease, visibility 0.6s ease;
+        }
+        #turnstile-gate.hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+        #turnstile-gate h2 {
+            color: #ffffff;
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            text-align: center;
+        }
+        #turnstile-gate p {
+            color: #8b8b9e;
+            font-size: 14px;
+            margin-bottom: 24px;
+            text-align: center;
+        }
+
         .container { text-align: center; max-width: 600px; width: 100%; }
         .logo-section { margin-bottom: 24px; min-height: 100px; display: flex; justify-content: center; align-items: center; }
         .logo { width: 90px; height: auto; user-select: none; pointer-events: none; filter: drop-shadow(0 0 30px rgba(102, 126, 234, 0.4)); }
@@ -64,7 +97,18 @@
             z-index: 1000;
         }
         .dropdown.active .dropdown-menu { opacity: 1; visibility: visible; transform: translateY(0); }
-        .dropdown-item { display: flex; align-items: center; gap: 10px; padding: 10px 12px; border-radius: 8px; color: #ffffff; font-size: 14px; }
+        .dropdown-item { 
+            display: flex; 
+            align-items: center; 
+            gap: 10px; 
+            padding: 10px 12px; 
+            border-radius: 8px; 
+            color: #ffffff; 
+            font-size: 14px; 
+            text-decoration: none; 
+            transition: background-color 0.2s ease; 
+        }
+        .dropdown-item:hover { background-color: #222222; }
         .dropdown-item.disabled { opacity: 0.5; cursor: not-allowed; }
         
         .action-row { display: flex; gap: 12px; justify-content: center; margin-bottom: 32px; }
@@ -114,6 +158,7 @@
         .stat-value.status-maintenance { color: #f59e0b; }
         .stat-value.status-testing { color: #8b5cf6; }
         .stat-value.status-updating { color: #3b82f6; }
+        .stat-value.status-in-dev { color: #f97316; }
         
         .stat-label { font-size: 12px; color: #6b6b7e; }
         .features { background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 12px; padding: 24px; margin-bottom: 24px; }
@@ -124,6 +169,12 @@
     </style>
 </head>
 <body>
+    <div id="turnstile-gate">
+        <h2>Verify you're human</h2>
+        <p>Please complete the security check to access Vyrix.win</p>
+        <div class="cf-turnstile" data-sitekey="0x4AAAAAAD1--8ecGoH4H15n" data-callback="onTurnstileSuccess" data-theme="dark"></div>
+    </div>
+
     <div class="container">
         <div class="logo-section">
             <img src="Logo.png" alt="Vyrix" class="logo" id="logo" onerror="this.style.display='none'; document.getElementById('logoText').style.display='block'">
@@ -136,7 +187,7 @@
         <div class="status">
             <span>✓ Undetected</span>
             <span>✓ Keyless</span>
-            <span>✓ Free Forever</span>
+            <span>✓ Free For 1-2 Months after Release</span>
         </div>
         
         <div class="dropdown">
@@ -149,13 +200,14 @@
                 <span>Download</span>
             </button>
             <div class="dropdown-menu" id="downloadDropdown">
-                <div class="dropdown-item disabled">
+                <a href="https://work.ink/2LuP/vyrixwin" target="_blank" class="dropdown-item">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <line x1="5" y1="12" x2="19" y2="12"></line>
-                        <polyline points="12 5 19 12 12 19"></polyline>
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                        <polyline points="7 10 12 15 17 10"></polyline>
+                        <line x1="12" y1="15" x2="12" y2="3"></line>
                     </svg>
-                    <span>Coming Soon</span>
-                </div>
+                    <span>Download Now</span>
+                </a>
             </div>
         </div>
         
@@ -245,7 +297,14 @@
         </div>
     </div>
     
-    <script>
+ <script>
+        function onTurnstileSuccess(token) {
+            const gate = document.getElementById('turnstile-gate');
+            gate.classList.add('hidden');
+            document.body.style.overflow = 'auto';
+            sessionStorage.setItem('cf_turnstile_token', token);
+        }
+
         function formatNumber(num) {
             if (num >= 1000000) return (num / 1000000).toFixed(1).replace(/\.0$/, '') + 'M';
             if (num >= 1000) return (num / 1000).toFixed(1).replace(/\.0$/, '') + 'K';
@@ -276,8 +335,9 @@
                 const statusEl = document.getElementById('main-status');
                 statusEl.textContent = vyrix.Status;
                 
-                statusEl.classList.remove('status-operational', 'status-down', 'status-maintenance', 'status-testing', 'status-updating');
-                const statusClass = 'status-' + vyrix.Status.toLowerCase();
+                statusEl.classList.remove('status-operational', 'status-down', 'status-maintenance', 'status-testing', 'status-updating', 'status-in-dev');
+                
+                const statusClass = 'status-' + vyrix.Status.toLowerCase().replace(/\s+/g, '-');
                 statusEl.classList.add(statusClass);
 
                 document.getElementById('ep-version').textContent = vyrix.Version;
@@ -302,7 +362,11 @@
                 const dot = document.getElementById('endpointStatusDot');
                 if(vyrix.Status === 'Operational') dot.style.background = '#10b981';
                 else if(vyrix.Status === 'Down') dot.style.background = '#ef4444';
-                else dot.style.background = '#f59e0b';
+                else if(vyrix.Status === 'Maintenance') dot.style.background = '#f59e0b';
+                else if(vyrix.Status === 'Testing') dot.style.background = '#8b5cf6';
+                else if(vyrix.Status === 'Updating') dot.style.background = '#3b82f6';
+                else if(vyrix.Status === 'In Dev') dot.style.background = '#f97316';
+                else dot.style.background = '#6b6b7e';
 
             } catch (error) {
                 console.error('Error fetching endpoint:', error);
