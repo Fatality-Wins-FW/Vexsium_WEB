@@ -1,7 +1,7 @@
 {
   "Vyrix.win": {
-    "Status": "Updating",
-    "Version": "0.0.0.1",
+    "Status": "Operational",
+    "Version": "0.0.0.2",
     "UNC": 98,
     "SUNC": 100,
     "Decompiler": true,
@@ -10,6 +10,9 @@
     "Changelogs": {
       "0.0.0.1": [
         "Release of Vyrix.win!."
+      ],
+      "0.0.0.2": [
+        "Updated to version-9affbe66b2624d20"
       ]
     }
   }
