@@ -1,7 +1,7 @@
 {
   "Vyrix.win": {
     "Status": "Operational",
-    "Version": "0.0.0.2",
+    "Version": "0.0.0.4",
     "UNC": 98,
     "SUNC": 100,
     "Decompiler": true,
