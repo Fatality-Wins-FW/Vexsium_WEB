@@ -1,7 +1,7 @@
 {
   "Vyrix.win": {
     "Status": "Operational",
-    "Version": "0.0.0.4",
+    "Version": "0.0.0.1",
     "UNC": 98,
     "SUNC": 100,
     "Decompiler": true,
@@ -9,18 +9,7 @@
     "RakNet": true,
     "Changelogs": {
       "0.0.0.1": [
-        "Release of Vyrix.win!."
-      ],
-      "0.0.0.2": [
-        "Updated to version-9affbe66b2624d20"
-      ],
-      "0.0.0.3": [
-        "Updated to version-ed2b47b81f08484a",
-        "Added Luarmor support",
-        "Rewrote Setthreadidentity and Getcallbackvalue"
-      ],
-      "0.0.0.4": [
-        "Fixed getcallbackvalue AGAIN (slowed + reverb)"
+        "Release of Vyrix.win with Madium API since Soda API we're Crashing!."
       ]
     }
   }
