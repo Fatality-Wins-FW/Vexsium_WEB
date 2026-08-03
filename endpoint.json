@@ -1,7 +1,7 @@
 {
   "Vyrix.win": {
     "Status": "Operational",
-    "Version": "0.0.0.1",
+    "Version": "0.0.0.2",
     "UNC": 98,
     "SUNC": 100,
     "Decompiler": true,
@@ -10,6 +10,10 @@
     "Changelogs": {
       "0.0.0.1": [
         "Release of Vyrix.win with Madium API since Soda API we're Crashing!."
+      ],
+      "0.0.0.2": [
+        "Reworked UI",
+        "Fixed UI Crashes"
       ]
     }
   }
