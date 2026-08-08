@@ -1,12 +1,12 @@
 {
   "Vyrix.win": {
-    "Status": "Operational",
-    "Version": "0.0.0.2",
-    "UNC": 98,
-    "SUNC": 100,
-    "Decompiler": true,
+    "Status": "Discontinued",
+    "Version": "?.?.?.?",
+    "UNC": 0,
+    "SUNC": 0,
+    "Decompiler": false,
     "Multi Instance": false,
-    "RakNet": true,
+    "RakNet": false,
     "Changelogs": {
       "0.0.0.1": [
         "Release of Vyrix.win with Madium API since Soda API we're Crashing!."
@@ -14,6 +14,9 @@
       "0.0.0.2": [
         "Reworked UI",
         "Fixed UI Crashes"
+      ],
+      "?.?.?.?": [
+        "Discontinuation of Vyrix.win Permanent Discontinuation of Vyrix.win!"
       ]
     }
   }
