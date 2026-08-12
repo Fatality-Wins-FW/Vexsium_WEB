@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Spectra | Advanced Visual Enhancement</title>
+    <link rel="icon" type="image/png" href="Logo.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -47,7 +48,6 @@
             z-index: 10;
         }
 
-        /* Hero Section */
         .hero {
             padding: 120px 0 80px;
             text-align: center;
@@ -59,6 +59,14 @@
             display: flex; 
             justify-content: center; 
             align-items: center; 
+        }
+
+        .logo {
+            width: 80px;
+            height: auto;
+            user-select: none;
+            pointer-events: none;
+            filter: drop-shadow(0 0 20px rgba(139, 92, 246, 0.3));
         }
 
         .logo-text { 
@@ -110,7 +118,6 @@
             box-shadow: 0 0 10px var(--accent-primary);
         }
 
-        /* Action Area */
         .action-area {
             display: flex;
             flex-direction: column;
@@ -214,7 +221,6 @@
             transform: translateY(-2px);
         }
 
-        /* Info Dropdown */
         .info-trigger { position: relative; }
         
         .info-dropdown {
@@ -259,6 +265,30 @@
             letter-spacing: 0.5px;
         }
 
+        .info-item {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            margin-bottom: 16px;
+        }
+
+        .info-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .info-label { 
+            font-size: 11px; 
+            color: var(--text-secondary); 
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .info-value {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
         .changelog-list { 
             list-style: none; 
             padding: 0; 
@@ -278,7 +308,10 @@
             line-height: 1.4;
         }
 
-        /* Stats Grid */
+        .changelog-item:last-child {
+            margin-bottom: 0;
+        }
+
         .stats-grid { 
             display: grid; 
             grid-template-columns: repeat(3, 1fr); 
@@ -315,7 +348,6 @@
             letter-spacing: 0.5px;
         }
 
-        /* Features Section */
         .features-section {
             background: var(--glass-bg);
             border: 1px solid var(--glass-border);
@@ -370,7 +402,6 @@
             line-height: 1.5;
         }
 
-        /* Footer */
         .footer { 
             text-align: center; 
             padding: 40px 0; 
@@ -390,8 +421,8 @@
     <div class="container">
         <section class="hero">
             <div class="logo-section">
-                <img src="Logo.png" alt="Spectra" class="logo" id="logo" style="display: none;" onerror="document.getElementById('logoText').style.display='block'">
-                <div class="logo-text" id="logoText">Spectra</div>
+                <img src="Logo.png" alt="Spectra" class="logo" id="logo" onerror="this.style.display='none'; document.getElementById('logoText').style.display='block'">
+                <div class="logo-text" id="logoText" style="display: none;">Spectra</div>
             </div>
             
             <h1 class="title">Advanced Visual Enhancement</h1>
@@ -443,7 +474,7 @@
                             <div class="info-grid">
                                 <div class="info-item">
                                     <span class="info-label">Current Version</span>
-                                    <span class="info-value" id="ep-version" style="font-size: 16px; font-weight: 600;">--</span>
+                                    <span class="info-value" id="ep-version">--</span>
                                 </div>
                                 <div class="info-item">
                                     <span class="info-label">Latest Changes</span>
