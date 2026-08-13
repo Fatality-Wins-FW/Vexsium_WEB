@@ -1,11 +1,14 @@
 {
   "Spectra": {
-    "Status": "In Dev",
+    "Status": "Operational",
     "Version": "0.0.0",
-    "Workink_Download": "https://work.ink/NONEYET",
+    "Workink_Download": "https://work.ink/2B1a/spectra",
     "Changelogs": {
       "UNKNOWN": [
         "Start of Spectra Development"
+      ],
+      "0.0.0": [
+        "Release!"
       ]
     }
   }
