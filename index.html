@@ -590,24 +590,13 @@
                 const changelogList = document.getElementById('ep-changelog');
                 changelogList.innerHTML = '';
                 
-                if (spectra.Changelogs && typeof spectra.Changelogs === 'object') {
-                    const versions = Object.keys(spectra.Changelogs);
-                    const latestVersion = versions[versions.length - 1];
-                    const changes = spectra.Changelogs[latestVersion];
-                    
-                    if (Array.isArray(changes) && changes.length > 0) {
-                        changes.forEach(change => {
-                            const li = document.createElement('li');
-                            li.className = 'changelog-item';
-                            li.textContent = change;
-                            changelogList.appendChild(li);
-                        });
-                    } else {
+                if (spectra.Changelogs && Array.isArray(spectra.Changelogs) && spectra.Changelogs.length > 0) {
+                    spectra.Changelogs.forEach(change => {
                         const li = document.createElement('li');
                         li.className = 'changelog-item';
-                        li.textContent = 'No recent changes';
+                        li.textContent = change;
                         changelogList.appendChild(li);
-                    }
+                    });
                 } else {
                     const li = document.createElement('li');
                     li.className = 'changelog-item';

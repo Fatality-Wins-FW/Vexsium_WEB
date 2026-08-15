@@ -2,16 +2,19 @@
   "Spectra": {
     "Status": "Operational",
     "Version": "0.0.1",
+    "type": "default",
+    "loaderVersion": "v0.0.1",
+    "clientVersion": "v0.0.1-ptb",
     "Workink_Download": "https://work.ink/2B1a/spectra",
-    "Changelogs": {
-      "0.0.0": [
-        "Release!"
-      ],
-      "0.0.1": [
-        "[+] Fixed UI Bugs",
-        "[+] Fixed Crashes",
-        "[+] Fixed Aimbot Issues"
-      ]
+    "Changelogs": [
+      "[+] Fixed UI Bugs",
+      "[+] Fixed Crashes",
+      "[+] Fixed Aimbot Issues"
+    ],
+    "supportedRobloxBuild": {
+      "hash": "ddf602d9cfe44005",
+      "version": "version-ddf602d9cfe44005",
+      "channel": "LIVE"
     }
   }
 }
