@@ -1,14 +1,16 @@
 {
   "Spectra": {
     "Status": "Operational",
-    "Version": "0.0.0",
+    "Version": "0.0.1",
     "Workink_Download": "https://work.ink/2B1a/spectra",
     "Changelogs": {
-      "UNKNOWN": [
-        "Start of Spectra Development"
-      ],
       "0.0.0": [
         "Release!"
+      ],
+      "0.0.1": [
+        "[+] Fixed UI Bugs",
+        "[+] Fixed Crashes",
+        "[+] Fixed Aimbot Issues"
       ]
     }
   }
