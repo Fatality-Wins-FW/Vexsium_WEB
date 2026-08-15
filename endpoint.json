@@ -1,15 +1,16 @@
 {
   "Spectra": {
     "Status": "Operational",
-    "Version": "0.0.1",
+    "Version": "0.0.2",
     "type": "default",
-    "loaderVersion": "v0.0.1",
-    "clientVersion": "v0.0.1-ptb",
+    "loaderVersion": "v0.0.2",
+    "clientVersion": "v0.0.2-ptb",
     "Workink_Download": "https://work.ink/2B1a/spectra",
     "Changelogs": [
-      "[+] Fixed UI Bugs",
-      "[+] Fixed Crashes",
-      "[+] Fixed Aimbot Issues"
+      "[+] Improved UI",
+      "[+] Fixed ESP",
+      "[+] Added Aimbot Methods/Modes",
+      "[+] Added ESP Preview"
     ],
     "supportedRobloxBuild": {
       "hash": "ddf602d9cfe44005",
