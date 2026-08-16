@@ -1,17 +1,14 @@
 {
-  "Spectra": {
-    "Status": "Operational",
-    "Version": "0.0.2",
+  "Vexsium": {
+    "Status": "In Dev",
+    "Version": "0.0.0",
     "type": "default",
-    "loaderVersion": "v0.0.2",
-    "clientVersion": "v0.0.2-ptb",
-    "Workink_Download": "https://work.ink/2B1a/spectra",
-    "Discord_Invite": "https://dsc.gg/spectrawin",
+    "loaderVersion": "v0.0.0",
+    "clientVersion": "v0.0.0-ptb",
+    "Workink_Download": "https://work.ink/None",
+    "Discord_Invite": "https://dsc.gg/vexsium",
     "Changelogs": [
-      "[+] Improved UI",
-      "[+] Fixed ESP",
-      "[+] Added Aimbot Methods/Modes",
-      "[+] Added ESP Preview"
+      "Nothing"
     ],
     "supportedRobloxBuild": {
       "hash": "ddf602d9cfe44005",
