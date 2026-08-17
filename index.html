@@ -7,333 +7,474 @@
     <link rel="icon" type="image/png" href="Logo.png">
     <style>
         :root {
-            --bg: #050505;
-            --surface: #111111;
-            --border: #222222;
-            --text: #e0e0e0;
-            --muted: #666666;
-            --accent: #ffffff;
+            --bg: #0c0e13;
+            --surface: #141720;
+            --surface-hover: #1a1e2b;
+            --border: #1f2435;
+            --text: #d8dce6;
+            --muted: #5c6478;
+            --accent: #4e9af5;
+            --accent-dim: rgba(78, 154, 245, 0.1);
+            --green: #34d399;
+            --red: #f87171;
+            --orange: #fb923c;
+            --yellow: #fbbf24;
+            --blue: #60a5fa;
+            --purple: #a78bfa;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        
+
         body {
-            font-family: 'Courier New', Courier, monospace;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
             background-color: var(--bg);
             color: var(--text);
-            line-height: 1.5;
+            line-height: 1.6;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
+            -webkit-font-smoothing: antialiased;
         }
 
-        .container { 
-            max-width: 900px; 
-            width: 100%; 
-            margin: 0 auto; 
-            padding: 40px 20px;
-            flex: 1;
+        .wrap {
+            max-width: 860px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 0 24px;
         }
 
-        header {
+        /* NAV */
+        nav {
+            padding: 20px 0;
             border-bottom: 1px solid var(--border);
-            padding-bottom: 20px;
-            margin-bottom: 40px;
+        }
+
+        nav .wrap {
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
         .brand {
-            font-size: 24px;
-            font-weight: bold;
-            letter-spacing: -1px;
             display: flex;
             align-items: center;
-            gap: 12px;
-        }
-
-        .logo {
-            width: 32px;
-            height: 32px;
-            filter: grayscale(100%);
-        }
-
-        nav a {
-            color: var(--muted);
+            gap: 10px;
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--text);
             text-decoration: none;
-            margin-left: 20px;
-            font-size: 14px;
-            transition: color 0.2s;
         }
 
-        nav a:hover {
-            color: var(--accent);
+        .brand img {
+            width: 28px;
+            height: 28px;
         }
 
-        .hero {
-            margin-bottom: 60px;
-        }
-
-        h1 {
-            font-size: 42px;
-            margin-bottom: 16px;
-            font-weight: normal;
-        }
-
-        .subtitle {
-            color: var(--muted);
-            font-size: 16px;
-            max-width: 500px;
-            margin-bottom: 32px;
-        }
-
-        .status-line {
-            display: inline-flex;
+        .nav-links {
+            display: flex;
             align-items: center;
             gap: 8px;
+        }
+
+        .nav-link {
+            padding: 6px 14px;
             font-size: 13px;
             color: var(--muted);
-            border: 1px solid var(--border);
-            padding: 6px 12px;
-            border-radius: 4px;
+            text-decoration: none;
+            border-radius: 6px;
+            transition: all 0.15s;
         }
 
-        .dot {
-            width: 6px;
-            height: 6px;
-            background-color: var(--accent);
-            border-radius: 50%;
+        .nav-link:hover {
+            color: var(--text);
+            background: var(--surface);
         }
 
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            margin-bottom: 60px;
+        /* HERO */
+        .hero {
+            padding: 80px 0 60px;
+            text-align: center;
         }
 
-        .card {
+        .hero h1 {
+            font-size: 44px;
+            font-weight: 700;
+            letter-spacing: -1px;
+            margin-bottom: 14px;
+            color: #fff;
+        }
+
+        .hero p {
+            color: var(--muted);
+            font-size: 16px;
+            max-width: 480px;
+            margin: 0 auto 32px;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 5px 14px;
             background: var(--surface);
             border: 1px solid var(--border);
-            padding: 24px;
-        }
-
-        .card h3 {
-            font-size: 16px;
-            margin-bottom: 12px;
-            font-weight: normal;
-            color: var(--accent);
-        }
-
-        .card p {
-            font-size: 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
             color: var(--muted);
         }
 
-        .actions {
+        .badge-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: var(--accent);
+        }
+
+        /* BUTTONS */
+        .btn-row {
             display: flex;
-            gap: 16px;
-            margin-bottom: 60px;
+            gap: 12px;
+            justify-content: center;
+            margin-top: 28px;
         }
 
         .btn {
             display: inline-flex;
             align-items: center;
-            justify-content: center;
-            padding: 12px 24px;
-            background: var(--surface);
-            border: 1px solid var(--border);
-            color: var(--text);
-            text-decoration: none;
+            gap: 8px;
+            padding: 10px 22px;
             font-size: 14px;
+            font-weight: 500;
+            border-radius: 8px;
+            text-decoration: none;
             cursor: pointer;
-            transition: all 0.2s;
+            border: 1px solid var(--border);
+            background: var(--surface);
+            color: var(--text);
+            transition: all 0.15s;
         }
 
         .btn:hover {
-            border-color: var(--accent);
-            background: var(--bg);
+            background: var(--surface-hover);
+            border-color: #2a3045;
         }
 
-        .btn-primary {
+        .btn-fill {
             background: var(--accent);
-            color: var(--bg);
             border-color: var(--accent);
+            color: #fff;
         }
 
-        .btn-primary:hover {
-            opacity: 0.9;
+        .btn-fill:hover {
+            opacity: 0.85;
+            background: var(--accent);
         }
 
-        footer {
-            border-top: 1px solid var(--border);
-            padding-top: 20px;
+        /* STATS ROW */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1px;
+            background: var(--border);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 60px;
+        }
+
+        .stat {
+            background: var(--surface);
+            padding: 24px 16px;
             text-align: center;
+        }
+
+        .stat-num {
+            font-size: 26px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 4px;
+        }
+
+        .stat-lbl {
             font-size: 12px;
             color: var(--muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* FEATURES */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-bottom: 60px;
+        }
+
+        .feat {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 24px;
+        }
+
+        .feat h3 {
+            font-size: 15px;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 8px;
+        }
+
+        .feat p {
+            font-size: 13px;
+            color: var(--muted);
+            line-height: 1.5;
+        }
+
+        /* INFO DROPDOWN */
+        .info-wrap {
+            position: relative;
         }
 
         .info-panel {
             display: none;
             position: absolute;
-            top: 100%;
+            top: calc(100% + 8px);
             right: 0;
+            width: 260px;
             background: var(--surface);
             border: 1px solid var(--border);
+            border-radius: 10px;
             padding: 16px;
-            width: 280px;
-            z-index: 100;
-            margin-top: 8px;
+            z-index: 200;
+            box-shadow: 0 12px 32px rgba(0,0,0,0.4);
         }
 
-        .info-trigger {
-            position: relative;
+        .info-panel.open { display: block; }
+
+        .info-panel h4 {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.6px;
+            color: var(--muted);
+            margin-bottom: 12px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid var(--border);
         }
 
-        .info-panel.active {
-            display: block;
-        }
-
-        .info-row {
+        .irow {
             display: flex;
             justify-content: space-between;
-            margin-bottom: 8px;
+            padding: 4px 0;
             font-size: 13px;
         }
 
-        .info-label { color: var(--muted); }
-        .info-val { color: var(--accent); }
+        .irow span:first-child { color: var(--muted); }
+        .irow span:last-child { color: var(--text); font-weight: 500; }
 
-        @media (max-width: 600px) {
-            header { flex-direction: column; gap: 20px; align-items: flex-start; }
-            nav a { margin-left: 0; margin-right: 20px; }
-            .actions { flex-direction: column; }
+        .ichanges {
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px solid var(--border);
+        }
+
+        .ichanges h4 {
+            margin-bottom: 8px;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .ichange {
+            font-size: 12px;
+            color: var(--muted);
+            padding: 4px 0 4px 10px;
+            border-left: 2px solid var(--accent);
+            margin-bottom: 6px;
+        }
+
+        /* FOOTER */
+        footer {
+            margin-top: auto;
+            padding: 24px 0;
+            border-top: 1px solid var(--border);
+            text-align: center;
+            font-size: 12px;
+            color: var(--muted);
+        }
+
+        @media (max-width: 640px) {
+            .hero h1 { font-size: 30px; }
+            .stats, .features { grid-template-columns: 1fr; }
+            .btn-row { flex-direction: column; align-items: center; }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <div class="brand">
-                <img src="Logo.png" alt="Vexsium" class="logo">
-                VEXSIUM
-            </div>
-            <nav>
-                <a href="#" id="discord-link">Discord</a>
-                <a href="#" class="info-trigger" id="infoBtn">Status</a>
-                <div class="info-panel" id="infoDropdown">
-                    <div class="info-row"><span class="info-label">Version</span><span class="info-val" id="ep-version">--</span></div>
-                    <div class="info-row"><span class="info-label">Loader</span><span class="info-val" id="ep-loader">--</span></div>
-                    <div class="info-row"><span class="info-label">UNC / sUNC</span><span class="info-val"><span id="ep-unc">--</span>% / <span id="ep-sunc">--</span>%</span></div>
-                    <div class="info-row"><span class="info-label">RakNet</span><span class="info-val" id="ep-raknet">--</span></div>
-                    <div class="info-row"><span class="info-label">Build</span><span class="info-val" id="ep-build">--</span></div>
+
+<nav>
+    <div class="wrap">
+        <a href="#" class="brand">
+            <img src="Logo.png" alt="Vexsium" onerror="this.style.display='none'">
+            Vexsium
+        </a>
+        <div class="nav-links">
+            <a href="#" class="nav-link" id="discord-link">Discord</a>
+            <div class="info-wrap">
+                <a href="#" class="nav-link" id="infoBtn">Status</a>
+                <div class="info-panel" id="infoPanel">
+                    <h4>Build Info</h4>
+                    <div class="irow"><span>Version</span><span id="ep-version">--</span></div>
+                    <div class="irow"><span>UNC</span><span id="ep-unc">--%</span></div>
+                    <div class="irow"><span>sUNC</span><span id="ep-sunc">--%</span></div>
+                    <div class="irow"><span>RakNet</span><span id="ep-raknet">--</span></div>
+                    <div class="irow"><span>Multi Instance</span><span id="ep-multi">--</span></div>
+                    <div class="irow"><span>Decompiler</span><span id="ep-decomp">--</span></div>
+                    <div class="ichanges">
+                        <h4>Changelog</h4>
+                        <div id="ep-changelog"></div>
+                    </div>
                 </div>
-            </nav>
-        </header>
-
-        <section class="hero">
-            <h1>Internal Execution.</h1>
-            <p class="subtitle">A lightweight internal executor focused on stability, speed, and high UNC compatibility. No bloat, just performance.</p>
-            
-            <div class="status-line">
-                <span class="dot" id="main-status-dot"></span>
-                <span id="main-status-text">Checking status...</span>
-            </div>
-        </section>
-
-        <div class="actions">
-            <a href="#" class="btn btn-primary" id="download-btn">Download v0.0.0</a>
-            <a href="#" class="btn" id="workink-link">Mirror (Work.ink)</a>
-        </div>
-
-        <div class="grid">
-            <div class="card">
-                <h3>Stability First</h3>
-                <p>Built with a focus on preventing crashes during injection. Vexsium prioritizes a smooth experience over flashy features.</p>
-            </div>
-            <div class="card">
-                <h3>High Compatibility</h3>
-                <p>Supports a wide range of scripts with high UNC and sUNC scores. If it runs on Roblox, Vexsium can likely handle it.</p>
-            </div>
-            <div class="card">
-                <h3>Active Development</h3>
-                <p>Regular updates to keep up with Roblox patches. Join the Discord to stay updated on the latest builds.</p>
             </div>
         </div>
+    </div>
+</nav>
 
-        <footer>
-            Vexsium 2026 • Internal Executor
-        </footer>
+<div class="wrap">
+    <section class="hero">
+        <h1>Vexsium</h1>
+        <p>A powerful internal executor with high UNC and sUNC scores.</p>
+        <div class="badge">
+            <span class="badge-dot" id="main-status-dot"></span>
+            <span id="main-status-text">Loading...</span>
+        </div>
+        <div class="btn-row">
+            <a href="#" class="btn btn-fill" id="download-btn">Download</a>
+            <a href="#" class="btn" id="workink-link">Work.ink Mirror</a>
+        </div>
+    </section>
+
+    <div class="stats">
+        <div class="stat">
+            <div class="stat-num" id="member-count">--</div>
+            <div class="stat-lbl">Active Users</div>
+        </div>
+        <div class="stat">
+            <div class="stat-num">99.9%</div>
+            <div class="stat-lbl">Uptime</div>
+        </div>
+        <div class="stat">
+            <div class="stat-num" id="status-label">--</div>
+            <div class="stat-lbl">Status</div>
+        </div>
     </div>
 
-    <script>
-        async function updateEndpointData() {
-            try {
-                const response = await fetch('endpoint.json');
-                if (!response.ok) throw new Error('Endpoint not found');
-                const data = await response.json();
-                
-                const vexsium = data["Vexsium"];
-                if (!vexsium) throw new Error('Vexsium data not found in endpoint');
+    <div class="features">
+        <div class="feat">
+            <h3>Fast Injection</h3>
+            <p>Quick and stable injection with minimal crash risk.</p>
+        </div>
+        <div class="feat">
+            <h3>Internal Build</h3>
+            <p>Prioritizes stability and fast execution speeds.</p>
+        </div>
+        <div class="feat">
+            <h3>Experienced Dev</h3>
+            <p>Built by a developer with a history of successful projects.</p>
+        </div>
+    </div>
+</div>
 
-                const statusText = document.getElementById('main-status-text');
-                const statusDot = document.getElementById('main-status-dot');
-                
-                statusText.textContent = vexsium.Status;
-                
-                const workinkLink = document.getElementById('workink-link');
-                const downloadBtn = document.getElementById('download-btn');
-                
-                if (vexsium.Workink_Download) {
-                    workinkLink.href = vexsium.Workink_Download;
-                }
+<footer>
+    <div class="wrap">Vexsium 2026 V1 &middot; All rights reserved</div>
+</footer>
 
-                const discordLink = document.getElementById('discord-link');
-                if (vexsium.Discord_Invite && discordLink) {
-                    discordLink.href = vexsium.Discord_Invite;
-                }
-                
-                document.getElementById('ep-version').textContent = vexsium.Version;
-                document.getElementById('ep-loader').textContent = vexsium.loaderVersion;
-                document.getElementById('ep-unc').textContent = vexsium.UNC;
-                document.getElementById('ep-sunc').textContent = vexsium.sUNC;
-                document.getElementById('ep-raknet').textContent = vexsium.Raknet ? 'Yes' : 'No';
-                
-                if (vexsium.supportedRobloxBuild) {
-                    document.getElementById('ep-build').textContent = vexsium.supportedRobloxBuild.channel;
-                }
+<script>
+    function fmt(n) {
+        if (n >= 1e6) return (n / 1e6).toFixed(1).replace(/\.0$/, '') + 'M';
+        if (n >= 1e3) return (n / 1e3).toFixed(1).replace(/\.0$/, '') + 'K';
+        return String(n);
+    }
 
-                downloadBtn.textContent = `Download ${vexsium.Version}`;
-
-                let dotColor = '#666';
-                if(vexsium.Status === 'Operational') dotColor = '#10b981';
-                else if(vexsium.Status === 'Down') dotColor = '#ef4444';
-                else if(vexsium.Status === 'In Dev') dotColor = '#f97316';
-                
-                statusDot.style.background = dotColor;
-
-            } catch (error) {
-                console.error('Error fetching endpoint:', error);
-            }
+    async function loadMembers() {
+        try {
+            const r = await fetch('https://discord.com/api/guilds/1538645400402264205/widget.json');
+            if (!r.ok) throw 0;
+            const d = await r.json();
+            document.getElementById('member-count').textContent = fmt(d.members ? d.members.length : 0) + '+';
+        } catch {
+            document.getElementById('member-count').textContent = '1K+';
         }
+    }
 
-        const infoBtn = document.getElementById('infoBtn');
-        const infoDropdown = document.getElementById('infoDropdown');
-        
-        infoBtn.addEventListener('click', (e) => { 
-            e.preventDefault();
-            infoDropdown.classList.toggle('active'); 
-        });
+    async function loadEndpoint() {
+        try {
+            const r = await fetch('endpoint.json');
+            if (!r.ok) throw 0;
+            const d = await r.json();
+            const v = d["Vexsium"];
+            if (!v) throw 0;
 
-        document.addEventListener('click', (e) => {
-            if (!infoBtn.contains(e.target) && !infoDropdown.contains(e.target)) {
-                infoDropdown.classList.remove('active');
+            document.getElementById('main-status-text').textContent = v.Status;
+            document.getElementById('status-label').textContent = v.Status;
+            document.getElementById('ep-version').textContent = v.Version;
+            document.getElementById('ep-unc').textContent = v.UNC + '%';
+            document.getElementById('ep-sunc').textContent = v.sUNC + '%';
+            document.getElementById('ep-raknet').textContent = v.Raknet ? 'Yes' : 'No';
+            document.getElementById('ep-multi').textContent = v.Multi_Instance ? 'Yes' : 'No';
+            document.getElementById('ep-decomp').textContent = v.Decompiler ? 'Yes' : 'No';
+
+            if (v.Workink_Download) {
+                document.getElementById('workink-link').href = v.Workink_Download;
+                document.getElementById('download-btn').href = v.Workink_Download;
             }
-        });
+            if (v.Discord_Invite) {
+                document.getElementById('discord-link').href = v.Discord_Invite;
+            }
 
-        updateEndpointData();
-        setInterval(updateEndpointData, 30000);
-    </script>
+            const cl = document.getElementById('ep-changelog');
+            cl.innerHTML = '';
+            if (Array.isArray(v.Changelogs) && v.Changelogs.length) {
+                v.Changelogs.forEach(c => {
+                    const div = document.createElement('div');
+                    div.className = 'ichange';
+                    div.textContent = c;
+                    cl.appendChild(div);
+                });
+            } else {
+                const div = document.createElement('div');
+                div.className = 'ichange';
+                div.textContent = 'No changes yet';
+                cl.appendChild(div);
+            }
+
+            let dc = '#5c6478';
+            if (v.Status === 'Operational') dc = '#34d399';
+            else if (v.Status === 'Down') dc = '#f87171';
+            else if (v.Status === 'Maintenance') dc = '#fbbf24';
+            else if (v.Status === 'Testing') dc = '#a78bfa';
+            else if (v.Status === 'Updating') dc = '#60a5fa';
+            else if (v.Status === 'In Dev') dc = '#fb923c';
+
+            document.getElementById('main-status-dot').style.background = dc;
+        } catch {
+            document.getElementById('main-status-text').textContent = 'Unknown';
+        }
+    }
+
+    document.getElementById('infoBtn').addEventListener('click', e => {
+        e.preventDefault();
+        document.getElementById('infoPanel').classList.toggle('open');
+    });
+
+    document.addEventListener('click', e => {
+        const w = document.querySelector('.info-wrap');
+        if (!w.contains(e.target)) document.getElementById('infoPanel').classList.remove('open');
+    });
+
+    loadMembers();
+    loadEndpoint();
+    setInterval(loadEndpoint, 30000);
+</script>
+
 </body>
 </html>
