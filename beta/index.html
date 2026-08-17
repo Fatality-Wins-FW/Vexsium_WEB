@@ -15,6 +15,7 @@
             --text-muted: #a1a1aa;
             --accent: #7c3aed;
             --accent-hover: #6d28d9;
+            --ease: cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -38,6 +39,27 @@
             flex: 1;
         }
 
+        /* ANIMATIONS */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.6; transform: scale(0.85); }
+        }
+
+        .anim-in {
+            opacity: 0;
+            animation: fadeInUp 0.6s var(--ease) forwards;
+        }
+
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.2s; }
+        .delay-3 { animation-delay: 0.3s; }
+        .delay-4 { animation-delay: 0.4s; }
+
         .hero {
             padding: 80px 0 60px;
             text-align: center;
@@ -55,6 +77,11 @@
             width: 64px;
             height: 64px;
             object-fit: contain;
+            transition: transform 0.3s var(--ease);
+        }
+
+        .logo-section:hover .logo {
+            transform: scale(1.05);
         }
 
         .logo-text { 
@@ -89,6 +116,11 @@
             font-size: 13px;
             font-weight: 500;
             color: var(--text-muted);
+            transition: border-color 0.2s var(--ease);
+        }
+
+        .status-badge:hover {
+            border-color: var(--text-muted);
         }
 
         .status-dot {
@@ -96,6 +128,7 @@
             height: 8px;
             border-radius: 50%;
             background: var(--accent);
+            animation: pulse 2s infinite var(--ease);
         }
 
         .action-area {
@@ -126,11 +159,17 @@
             font-weight: 600;
             cursor: pointer;
             border: 1px solid var(--accent);
-            transition: background 0.15s;
+            transition: all 0.2s var(--ease);
         }
 
         .btn-main:hover {
             background: var(--accent-hover);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(124, 58, 237, 0.3);
+        }
+
+        .btn-main:active {
+            transform: translateY(0);
         }
 
         .dropdown-menu {
@@ -144,9 +183,10 @@
             padding: 4px;
             opacity: 0;
             visibility: hidden;
-            transform: translateY(-4px);
-            transition: all 0.15s ease;
+            transform: translateY(-8px);
+            transition: all 0.2s var(--ease);
             z-index: 100;
+            box-shadow: 0 12px 32px rgba(0,0,0,0.4);
         }
 
         .dropdown.active .dropdown-menu { 
@@ -164,6 +204,7 @@
             color: var(--text-main); 
             font-size: 14px; 
             text-decoration: none;
+            transition: background 0.15s var(--ease);
         }
 
         .dropdown-item:hover { 
@@ -186,7 +227,7 @@
             border-radius: 4px; 
             color: var(--text-muted); 
             cursor: pointer; 
-            transition: all 0.15s; 
+            transition: all 0.2s var(--ease); 
             text-decoration: none; 
         }
 
@@ -194,6 +235,7 @@
             background: var(--surface-hover); 
             color: var(--text-main);
             border-color: #3f3f46;
+            transform: translateY(-2px);
         }
 
         .info-trigger { position: relative; }
@@ -209,10 +251,11 @@
             padding: 16px;
             opacity: 0;
             visibility: hidden;
-            transform: translateY(4px);
-            transition: all 0.15s ease;
+            transform: translateY(8px);
+            transition: all 0.2s var(--ease);
             z-index: 100;
             text-align: left;
+            box-shadow: 0 12px 32px rgba(0,0,0,0.4);
         }
 
         .info-dropdown.active { 
@@ -284,6 +327,12 @@
             border-radius: 4px; 
             padding: 20px; 
             text-align: center;
+            transition: all 0.2s var(--ease);
+        }
+
+        .stat-card:hover {
+            border-color: #3f3f46;
+            transform: translateY(-2px);
         }
 
         .stat-value { 
@@ -331,6 +380,12 @@
             border: 1px solid var(--border);
             border-radius: 4px;
             padding: 20px;
+            transition: all 0.2s var(--ease);
+        }
+
+        .feature-item:hover {
+            border-color: #3f3f46;
+            transform: translateY(-2px);
         }
 
         .feature-icon {
@@ -375,7 +430,7 @@
 </head>
 <body>
     <div class="container">
-        <section class="hero">
+        <section class="hero anim-in">
             <div class="logo-section">
                 <img src="Logo.png" alt="Vexsium" class="logo" id="logo" onerror="this.style.display='none'; document.getElementById('logoText').style.display='block'">
                 <div class="logo-text" id="logoText" style="display: none;">Vexsium</div>
@@ -390,7 +445,7 @@
             </div>
         </section>
 
-        <div class="action-area">
+        <div class="action-area anim-in delay-1">
             <div class="dropdown">
                 <button class="btn-main" id="downloadBtn">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
@@ -452,7 +507,7 @@
             </div>
         </div>
         
-        <div class="stats-grid">
+        <div class="stats-grid anim-in delay-2">
             <div class="stat-card">
                 <div class="stat-value" id="member-count">--</div>
                 <div class="stat-label">Active Users</div>
@@ -467,7 +522,7 @@
             </div>
         </div>
         
-        <section class="features-section">
+        <section class="features-section anim-in delay-3">
             <div class="features-header">
                 <h3>Why Choose Vexsium</h3>
                 <p>Built for performance, designed for reliability.</p>
@@ -503,7 +558,7 @@
             </div>
         </section>
         
-        <div class="footer">
+        <div class="footer anim-in delay-4">
             Vexsium 2026 V1 • All rights reserved
         </div>
     </div>
