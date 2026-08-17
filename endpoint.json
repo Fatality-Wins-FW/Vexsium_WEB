@@ -10,7 +10,6 @@
     "Decompiler": true,
     "loaderVersion": "v0.0.0",
     "clientVersion": "v0.0.0-ptb",
-    "Workink_Download": "https://work.ink/None",
     "Discord_Invite": "https://dsc.gg/vexsium",
     "Changelogs": [
       "Nothing"
@@ -19,6 +18,14 @@
       "hash": "ddf602d9cfe44005",
       "version": "version-ddf602d9cfe44005",
       "channel": "LIVE"
+    },
+
+
+    "Download_Options": {
+      "Download_1": {
+        "Title": "Work.ink",
+        "Download_Link": "https://work.ink/None"
+      }
     }
   }
 }
