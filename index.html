@@ -639,7 +639,7 @@
 
     async function loadEndpoint() {
         try {
-            const r = await fetch('endpoint.json');
+            const r = await fetch('https://vexsium.kdns.fr/API/endpoint.json');
             if (!r.ok) throw 0;
             const d = await r.json();
             const v = d["Vexsium"];
