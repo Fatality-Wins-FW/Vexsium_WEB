@@ -49,6 +49,8 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
         }
 
         .brand {
@@ -70,6 +72,7 @@
             display: flex;
             align-items: center;
             gap: 8px;
+            flex-wrap: wrap;
         }
 
         .nav-link {
@@ -79,6 +82,7 @@
             text-decoration: none;
             border-radius: 6px;
             transition: all 0.2s var(--ease-out);
+            white-space: nowrap;
         }
 
         .nav-link:hover {
@@ -104,6 +108,7 @@
             font-weight: 700;
             color: #fff;
             margin-bottom: 12px;
+            line-height: 1.2;
         }
 
         .docs-header p {
@@ -142,12 +147,13 @@
             background: var(--surface);
             border: 1px solid var(--border);
             border-radius: 10px;
-            padding: 20px;
+            padding: 16px 20px;
             margin: 16px 0;
             display: flex;
             align-items: center;
             flex-wrap: wrap;
             gap: 12px;
+            position: relative;
         }
 
         .endpoint-method {
@@ -158,12 +164,55 @@
             border-radius: 4px;
             font-weight: 600;
             font-size: 13px;
+            flex-shrink: 0;
         }
 
         .endpoint-url {
             font-family: 'Courier New', monospace;
             color: var(--accent);
             font-size: 14px;
+            word-break: break-all;
+            flex: 1;
+        }
+
+        .copy-btn {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: var(--surface-hover);
+            border: 1px solid var(--border);
+            color: var(--muted);
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s var(--ease-out);
+            opacity: 0;
+        }
+
+        .endpoint-box .copy-btn {
+            position: relative;
+            top: auto;
+            right: auto;
+            opacity: 1;
+            flex-shrink: 0;
+        }
+
+        .code-block:hover .copy-btn, .response-example:hover .copy-btn, .endpoint-box .copy-btn:hover {
+            opacity: 1;
+        }
+
+        .copy-btn:hover {
+            background: var(--accent);
+            color: #fff;
+            border-color: var(--accent);
+        }
+
+        .copy-btn.copied {
+            background: var(--green);
+            color: #fff;
+            border-color: var(--green);
         }
 
         .code-block, .response-example {
@@ -187,53 +236,30 @@
             line-height: 1.6;
             color: #e6edf3;
             padding-right: 60px;
+            white-space: pre;
         }
 
         .response-example pre {
             color: #a5d6ff;
         }
 
-        .copy-btn {
-            position: absolute;
-            top: 12px;
-            right: 12px;
-            background: var(--surface-hover);
+        .table-wrapper {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            margin: 16px 0;
             border: 1px solid var(--border);
-            color: var(--muted);
-            padding: 4px 10px;
-            border-radius: 6px;
-            font-size: 12px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.2s var(--ease-out);
-            opacity: 0;
-        }
-
-        .code-block:hover .copy-btn, .response-example:hover .copy-btn {
-            opacity: 1;
-        }
-
-        .copy-btn:hover {
-            background: var(--accent);
-            color: #fff;
-            border-color: var(--accent);
-        }
-
-        .copy-btn.copied {
-            background: var(--green);
-            color: #fff;
-            border-color: var(--green);
+            border-radius: 8px;
         }
 
         table {
             width: 100%;
             border-collapse: collapse;
-            margin: 16px 0;
             font-size: 14px;
+            min-width: 600px;
         }
 
         th, td {
-            padding: 12px;
+            padding: 12px 16px;
             text-align: left;
             border-bottom: 1px solid var(--border);
         }
@@ -242,10 +268,16 @@
             background: var(--surface);
             font-weight: 600;
             color: #fff;
+            position: sticky;
+            top: 0;
         }
 
         td {
             color: var(--text);
+        }
+
+        tr:last-child td {
+            border-bottom: none;
         }
 
         tr:hover {
@@ -258,6 +290,7 @@
             border-radius: 4px;
             font-size: 12px;
             font-weight: 500;
+            white-space: nowrap;
         }
 
         .badge-string { background: rgba(136, 23, 113, 0.2); color: #d8b4fe; }
@@ -275,10 +308,18 @@
         }
 
         @media (max-width: 640px) {
+            .wrap { padding: 0 16px; }
+            .docs-content { padding: 40px 0; }
             .docs-header h1 { font-size: 28px; }
-            table { font-size: 12px; }
-            th, td { padding: 8px; }
-            .copy-btn { opacity: 1; }
+            .docs-header p { font-size: 15px; }
+            .docs-section h2 { font-size: 20px; }
+            .docs-section h3 { font-size: 16px; }
+            .endpoint-box { padding: 12px 16px; }
+            .code-block pre, .response-example pre { font-size: 12px; padding-right: 0; }
+            .copy-btn { opacity: 1; position: relative; top: auto; right: auto; margin-top: 8px; display: block; width: 100%; text-align: center; }
+            .endpoint-box .copy-btn { width: auto; margin-top: 0; }
+            table { font-size: 13px; }
+            th, td { padding: 10px 12px; }
         }
     </style>
 </head>
@@ -319,6 +360,7 @@
             <div class="endpoint-box">
                 <span class="endpoint-method">GET</span>
                 <span class="endpoint-url" id="endpoint-url-text">https://vexsium.kdns.fr/API/endpoint.json</span>
+                <button class="copy-btn" data-target="endpoint-url-text">Copy URL</button>
             </div>
 
             <h3>Example Request</h3>
@@ -366,118 +408,122 @@ console.log(data);</code></pre>
             </div>
 
             <h3>Response Fields</h3>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Field</th>
-                        <th>Type</th>
-                        <th>Description</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Status</td>
-                        <td><span class="badge badge-string">string</span></td>
-                        <td>Current operational status (In Dev, Operational, Down, Maintenance, Testing, Updating)</td>
-                    </tr>
-                    <tr>
-                        <td>Version</td>
-                        <td><span class="badge badge-string">string</span></td>
-                        <td>Semantic version, e.g. 0.0.0</td>
-                    </tr>
-                    <tr>
-                        <td>UNC</td>
-                        <td><span class="badge badge-integer">integer</span></td>
-                        <td>UNC compatibility score (0-100)</td>
-                    </tr>
-                    <tr>
-                        <td>sUNC</td>
-                        <td><span class="badge badge-integer">integer</span></td>
-                        <td>sUNC compatibility score (0-100)</td>
-                    </tr>
-                    <tr>
-                        <td>Raknet</td>
-                        <td><span class="badge badge-string">boolean</span></td>
-                        <td>Whether RakNet support is enabled</td>
-                    </tr>
-                    <tr>
-                        <td>Multi_Instance</td>
-                        <td><span class="badge badge-string">boolean</span></td>
-                        <td>Whether multi-instance is supported</td>
-                    </tr>
-                    <tr>
-                        <td>Decompiler</td>
-                        <td><span class="badge badge-string">boolean</span></td>
-                        <td>Whether decompiler is enabled</td>
-                    </tr>
-                    <tr>
-                        <td>loaderVersion</td>
-                        <td><span class="badge badge-string">string</span></td>
-                        <td>Current loader version</td>
-                    </tr>
-                    <tr>
-                        <td>clientVersion</td>
-                        <td><span class="badge badge-string">string</span></td>
-                        <td>Current client version</td>
-                    </tr>
-                    <tr>
-                        <td>Discord_Invite</td>
-                        <td><span class="badge badge-string">string</span></td>
-                        <td>Discord server invite link</td>
-                    </tr>
-                    <tr>
-                        <td>Changelogs</td>
-                        <td><span class="badge badge-array">array</span></td>
-                        <td>Array of recent changelog entries</td>
-                    </tr>
-                    <tr>
-                        <td>supportedRobloxBuild</td>
-                        <td><span class="badge badge-object">object</span></td>
-                        <td>Supported Roblox build information</td>
-                    </tr>
-                    <tr>
-                        <td>Download_Options</td>
-                        <td><span class="badge badge-object">object</span></td>
-                        <td>Available download mirrors and links</td>
-                    </tr>
-                </tbody>
-            </table>
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Field</th>
+                            <th>Type</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Status</td>
+                            <td><span class="badge badge-string">string</span></td>
+                            <td>Current operational status (In Dev, Operational, Down, Maintenance, Testing, Updating)</td>
+                        </tr>
+                        <tr>
+                            <td>Version</td>
+                            <td><span class="badge badge-string">string</span></td>
+                            <td>Semantic version, e.g. 0.0.0</td>
+                        </tr>
+                        <tr>
+                            <td>UNC</td>
+                            <td><span class="badge badge-integer">integer</span></td>
+                            <td>UNC compatibility score (0-100)</td>
+                        </tr>
+                        <tr>
+                            <td>sUNC</td>
+                            <td><span class="badge badge-integer">integer</span></td>
+                            <td>sUNC compatibility score (0-100)</td>
+                        </tr>
+                        <tr>
+                            <td>Raknet</td>
+                            <td><span class="badge badge-string">boolean</span></td>
+                            <td>Whether RakNet support is enabled</td>
+                        </tr>
+                        <tr>
+                            <td>Multi_Instance</td>
+                            <td><span class="badge badge-string">boolean</span></td>
+                            <td>Whether multi-instance is supported</td>
+                        </tr>
+                        <tr>
+                            <td>Decompiler</td>
+                            <td><span class="badge badge-string">boolean</span></td>
+                            <td>Whether decompiler is enabled</td>
+                        </tr>
+                        <tr>
+                            <td>loaderVersion</td>
+                            <td><span class="badge badge-string">string</span></td>
+                            <td>Current loader version</td>
+                        </tr>
+                        <tr>
+                            <td>clientVersion</td>
+                            <td><span class="badge badge-string">string</span></td>
+                            <td>Current client version</td>
+                        </tr>
+                        <tr>
+                            <td>Discord_Invite</td>
+                            <td><span class="badge badge-string">string</span></td>
+                            <td>Discord server invite link</td>
+                        </tr>
+                        <tr>
+                            <td>Changelogs</td>
+                            <td><span class="badge badge-array">array</span></td>
+                            <td>Array of recent changelog entries</td>
+                        </tr>
+                        <tr>
+                            <td>supportedRobloxBuild</td>
+                            <td><span class="badge badge-object">object</span></td>
+                            <td>Supported Roblox build information</td>
+                        </tr>
+                        <tr>
+                            <td>Download_Options</td>
+                            <td><span class="badge badge-object">object</span></td>
+                            <td>Available download mirrors and links</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
 
             <h3>Status Values</h3>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Status</th>
-                        <th>Description</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><span class="badge" style="background: rgba(52, 211, 153, 0.2); color: #6ee7b7;">Operational</span></td>
-                        <td>All systems functioning normally</td>
-                    </tr>
-                    <tr>
-                        <td><span class="badge" style="background: rgba(251, 191, 36, 0.2); color: #fcd34d;">In Dev</span></td>
-                        <td>Currently in development, may be unstable</td>
-                    </tr>
-                    <tr>
-                        <td><span class="badge" style="background: rgba(251, 146, 60, 0.2); color: #fdba74;">Maintenance</span></td>
-                        <td>Undergoing scheduled maintenance</td>
-                    </tr>
-                    <tr>
-                        <td><span class="badge" style="background: rgba(96, 165, 250, 0.2); color: #93c5fd;">Testing</span></td>
-                        <td>Currently being tested</td>
-                    </tr>
-                    <tr>
-                        <td><span class="badge" style="background: rgba(167, 139, 250, 0.2); color: #c4b5fd;">Updating</span></td>
-                        <td>Receiving updates</td>
-                    </tr>
-                    <tr>
-                        <td><span class="badge" style="background: rgba(248, 113, 113, 0.2); color: #fca5a5;">Down</span></td>
-                        <td>Service is currently unavailable</td>
-                    </tr>
-                </tbody>
-            </table>
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Status</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="badge" style="background: rgba(52, 211, 153, 0.2); color: #6ee7b7;">Operational</span></td>
+                            <td>All systems functioning normally</td>
+                        </tr>
+                        <tr>
+                            <td><span class="badge" style="background: rgba(251, 191, 36, 0.2); color: #fcd34d;">In Dev</span></td>
+                            <td>Currently in development, may be unstable</td>
+                        </tr>
+                        <tr>
+                            <td><span class="badge" style="background: rgba(251, 146, 60, 0.2); color: #fdba74;">Maintenance</span></td>
+                            <td>Undergoing scheduled maintenance</td>
+                        </tr>
+                        <tr>
+                            <td><span class="badge" style="background: rgba(96, 165, 250, 0.2); color: #93c5fd;">Testing</span></td>
+                            <td>Currently being tested</td>
+                        </tr>
+                        <tr>
+                            <td><span class="badge" style="background: rgba(167, 139, 250, 0.2); color: #c4b5fd;">Updating</span></td>
+                            <td>Receiving updates</td>
+                        </tr>
+                        <tr>
+                            <td><span class="badge" style="background: rgba(248, 113, 113, 0.2); color: #fca5a5;">Down</span></td>
+                            <td>Service is currently unavailable</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
 
         <div class="docs-section">
@@ -495,9 +541,19 @@ console.log(data);</code></pre>
 <script>
     document.querySelectorAll('.copy-btn').forEach(btn => {
         btn.addEventListener('click', () => {
-            const codeBlock = btn.parentElement.querySelector('code');
-            if (codeBlock) {
-                navigator.clipboard.writeText(codeBlock.innerText).then(() => {
+            let textToCopy = '';
+            
+            if (btn.dataset.target) {
+                textToCopy = document.getElementById(btn.dataset.target).innerText;
+            } else {
+                const codeBlock = btn.parentElement.querySelector('code');
+                if (codeBlock) {
+                    textToCopy = codeBlock.innerText;
+                }
+            }
+
+            if (textToCopy) {
+                navigator.clipboard.writeText(textToCopy).then(() => {
                     const originalText = btn.innerText;
                     btn.innerText = 'Copied!';
                     btn.classList.add('copied');
