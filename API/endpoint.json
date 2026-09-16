@@ -2,7 +2,7 @@
   "Venus": {
     "Status": "In Dev",
     "Version": "0.0.0",
-    "type": "default",
+    "type": "external",
     "loaderVersion": "v0.0.0",
     "clientVersion": "v0.0.0-ptb",
     "Discord_Invite": "https://discord.gg/beM4pRtBdG",
