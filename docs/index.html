@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vexsium - Documentation</title>
+    <title>Venus - Documentation</title>
     <link rel="icon" type="image/png" href="Logo.png">
-    <meta name="description" content="Vexsium API Documentation">
+    <meta name="description" content="Venus API Documentation">
     <meta name="theme-color" content="#4e9af5">
     <style>
         :root {
@@ -328,13 +328,13 @@
 <nav>
     <div class="wrap">
         <a href="index.html" class="brand">
-            <img src="Logo.png" alt="Vexsium" onerror="this.style.display='none'">
-            Vexsium
+            <img src="Logo.png" alt="Venus" onerror="this.style.display='none'">
+            Venus
         </a>
         <div class="nav-links">
             <a href="../home" class="nav-link">Home</a>
             <a href="../docs" class="nav-link">API Docs</a>
-            <a href="https://dsc.gg/vexsium" target="_blank" class="nav-link">Discord</a>
+            <a href="https://discord.gg/beM4pRtBdG" target="_blank" class="nav-link">Discord</a>
         </div>
     </div>
 </nav>
@@ -343,7 +343,7 @@
     <div class="docs-content">
         <div class="docs-header">
             <h1>API Documentation</h1>
-            <p>The public Vexsium API is unauthenticated and rate-limited per IP. All responses are JSON. The base URL is <code style="background: var(--surface); padding: 2px 6px; border-radius: 4px; color: var(--accent);">https://vexsium.kdns.fr</code></p>
+            <p>The public Venus API is unauthenticated and rate-limited per IP. All responses are JSON. The base URL is <code style="background: var(--surface); padding: 2px 6px; border-radius: 4px; color: var(--accent);">https://getvenus.kdns.fr</code></p>
         </div>
 
         <div class="docs-section">
@@ -355,18 +355,18 @@
 
         <div class="docs-section" id="endpoint">
             <h2>GET /API/endpoint.json</h2>
-            <p>Returns the current status, version, and configuration of Vexsium.</p>
+            <p>Returns the current status, version, and configuration of Venus.</p>
 
             <div class="endpoint-box">
                 <span class="endpoint-method">GET</span>
-                <span class="endpoint-url" id="endpoint-url-text">https://vexsium.kdns.fr/API/endpoint.json</span>
+                <span class="endpoint-url" id="endpoint-url-text">https://getvenus.kdns.fr/API/endpoint.json</span>
                 <button class="copy-btn" data-target="endpoint-url-text">Copy URL</button>
             </div>
 
             <h3>Example Request</h3>
             <div class="code-block">
                 <button class="copy-btn" type="button">Copy</button>
-                <pre><code>const res = await fetch("https://vexsium.kdns.fr/API/endpoint.json", {
+                <pre><code>const res = await fetch("https://getvenus.kdns.fr/API/endpoint.json", {
   headers: { Accept: "application/json" },
 });
 const data = await res.json();
@@ -377,7 +377,7 @@ console.log(data);</code></pre>
             <div class="response-example">
                 <button class="copy-btn" type="button">Copy</button>
                 <pre><code>{
-  "Vexsium": {
+  "Venus": {
     "Status": "In Dev",
     "Version": "0.0.0",
     "type": "default",
@@ -388,7 +388,7 @@ console.log(data);</code></pre>
     "Decompiler": true,
     "loaderVersion": "v0.0.0",
     "clientVersion": "v0.0.0-ptb",
-    "Discord_Invite": "https://dsc.gg/vexsium",
+    "Discord_Invite": "https://discord.gg/beM4pRtBdG",
     "Changelogs": [
       "Nothing"
     ],
@@ -529,13 +529,13 @@ console.log(data);</code></pre>
         <div class="docs-section">
             <h2>Need Help?</h2>
             <p>Need an endpoint that is not listed here? Open an issue on Discord.</p>
-            <a href="https://dsc.gg/vexsium" target="_blank" class="nav-link" style="display: inline-block; margin-top: 8px;">Join our Discord</a>
+            <a href="https://discord.gg/beM4pRtBdG" target="_blank" class="nav-link" style="display: inline-block; margin-top: 8px;">Join our Discord</a>
         </div>
     </div>
 </div>
 
 <footer>
-    <div class="wrap">Vexsium 2026 V1 &middot; All rights reserved</div>
+    <div class="wrap">Venus 2026 V1 &middot; All rights reserved</div>
 </footer>
 
 <script>
